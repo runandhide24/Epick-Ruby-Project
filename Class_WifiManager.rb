@@ -1,7 +1,7 @@
 # Written By Lance Phelps
 # Copywrite 2012
 # WifiManager is intended to work with the system on getting the various components of the wifi adapter set up.
-
+#Though I haven't yet uploaded the license I intend this project to be licensed under a GPL3
 
 class WifiManager
 
