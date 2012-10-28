@@ -5,21 +5,36 @@
 
 class WifiManager
 
-	@@userEssidCon = nil
-
-	def initializeWifi
-
-	#The following will need some revision as it only works if your system uses wlan0 for the Wifi Adapter
+	@availibleWifiCells = nil
 	
-	system("ifconfig wlan0 down") #Bring the wireless adapter down to setup the DHCP Client
-	system("dhclient -r wlan0")	#Prepare the DHCP Client by setting it to listen to the wlan0 <-- lacks flexibility, plan to rewrite.
-	system("ifconfig wlan0 up")	#And Bring wlan0 back up
+	def getAvailibleWifiCells
+		
+		if @availibleWifiCells != nil
+			return @availibleWifiCells
+		else
+			puts "Error 1: undefined varible"
+		end
+			
+	end
+
+	def initializeWifi(adapterInterface)
+
+	
+		system("ifconfig #{ adapterInterface } down") #Bring the wireless adapter down to setup the DHCP Client=
+		system("dhclient -r wlan0")	#Prepare the DHCP Client by setting it to listen to the wlan0 <-- lacks flexibility, plan to rewrite.
+		system("ifconfig #{ adapterInterface } up")	#And Bring wlan0 back up
 	
 	end
 
-	def wifiScan
+	def wifiScan(adapterInterface)
 
-	#This method runs a scan of the available ESSID connections
+		#This method runs a scan of the available ESSID connections then stores them in the instance veriable availibleWifiCells
 
+		@availibleWifiCells = system("iwlist #{ adapterInterface } scanning")
+	
+	end
+	
+	
+	
 	
 end
