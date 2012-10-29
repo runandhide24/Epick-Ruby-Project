@@ -9,5 +9,4 @@ wifiManagerObj = WifiManager.new
 
 wifiManagerObj.wifiScan ("wlan0")
 
-
-
+wifiManagerObj.requestPassword 

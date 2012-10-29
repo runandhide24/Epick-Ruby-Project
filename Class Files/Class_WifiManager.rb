@@ -4,10 +4,13 @@
 # Though I haven't yet uploaded the license I intend this project to be licensed under a GPL3
 
 class WifiManager
-
+	
+	
 	def initialize
 	
 		@availibleWifiCells = nil
+		@essidPassword = nil
+		
 		
 	end
 	
@@ -17,14 +20,23 @@ class WifiManager
 			return @availibleWifiCells
 		else
 			puts "Error 1: undefined varible"
-		end
-			
+		end 
+			 
 	end
-
+	
+	def getEssidPassword
+		
+		if @essidPassword != nil
+			return @essidPassword
+		else
+			puts "Error 1: undefined veriable"
+		end
+	end
+	
 	def initializeWifi (adapterInterface)
 
 		system("ifconfig #{ adapterInterface } down") #Bring the wireless adapter down to setup the DHCP Client
-		system("dhclient -r wlan0")	#Prepare the DHCP Client by setting it to listen to the wlan0 <-- lacks flexibility, plan to rewrite.
+		system("dhclient -r #{ adapterInterface }")	#Prepare the DHCP Client by setting it to listen to the wlan0 <-- lacks flexibility, plan to rewrite.
 		system("ifconfig #{ adapterInterface } up")	#And Bring wlan0 back up
 	
 	end
@@ -37,4 +49,10 @@ class WifiManager
 	
 	end
 	
+	def requestPassword
+		
+		print "The Essid You are attempting to connect to is encrypted. \n Please enter the Password:"
+		@essidPassword = gets
+	
+	end
 end
